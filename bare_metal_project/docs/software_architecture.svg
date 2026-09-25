@@ -1,0 +1,81 @@
+<svg viewBox="0 0 820 480" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <style>
+    .layer { stroke:#2b3a55; stroke-width:2; }
+    .app   { fill:#eef2fb; }
+    .drv   { fill:#f5f2ea; }
+    .isr   { fill:#f8ecec; }
+    .box   { fill:#ffffff; stroke:#2b3a55; stroke-width:1.5; rx:6; }
+    .title { font-size:16px; font-weight:bold; fill:#1b1f27; }
+    .label { font-size:13px; fill:#1b1f27; }
+    .small { font-size:11px; fill:#4a5468; }
+    .arrow { stroke:#2b3a55; stroke-width:1.6; fill:none; marker-end:url(#arrow2); }
+  </style>
+  <defs>
+    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2b3a55"/>
+    </marker>
+  </defs>
+
+  <rect x="10" y="10" width="800" height="460" rx="14" fill="#ffffff" stroke="#8fa0c4" stroke-width="2"/>
+  <text x="30" y="36" class="title">Layered Software Architecture (C and C++/OOP versions)</text>
+
+  <!-- Application layer -->
+  <rect x="30" y="60" width="760" height="130" rx="10" class="layer app"/>
+  <text x="45" y="82" class="label" font-weight="bold">Application Layer</text>
+
+  <rect x="45" y="95" width="150" height="75" class="box"/>
+  <text x="120" y="120" text-anchor="middle" class="label">main /</text>
+  <text x="120" y="138" text-anchor="middle" class="label">demo harness</text>
+  <text x="120" y="156" text-anchor="middle" class="small">scenario setup</text>
+
+  <rect x="215" y="95" width="180" height="75" class="box"/>
+  <text x="305" y="120" text-anchor="middle" class="label" font-weight="bold">TemperatureMonitor</text>
+  <text x="305" y="140" text-anchor="middle" class="small">(C++: orchestrator class</text>
+  <text x="305" y="155" text-anchor="middle" class="small">C: temperature.c logic)</text>
+
+  <rect x="415" y="95" width="170" height="75" class="box"/>
+  <text x="500" y="120" text-anchor="middle" class="label" font-weight="bold">Sensor Strategy</text>
+  <text x="500" y="140" text-anchor="middle" class="small">ITemperatureSensor /</text>
+  <text x="500" y="155" text-anchor="middle" class="small">Rev-A · Rev-B impl</text>
+
+  <rect x="605" y="95" width="165" height="75" class="box"/>
+  <text x="687" y="120" text-anchor="middle" class="label" font-weight="bold">LedController</text>
+  <text x="687" y="140" text-anchor="middle" class="small">OK/Warning/Critical</text>
+  <text x="687" y="155" text-anchor="middle" class="small">-&gt; LED pattern</text>
+
+  <!-- Driver / HAL layer -->
+  <rect x="30" y="210" width="760" height="130" rx="10" class="layer drv"/>
+  <text x="45" y="232" class="label" font-weight="bold">Driver / HAL Layer  (IAdc, IGpio, IEeprom interfaces in C++;</text>
+  <text x="45" y="248" class="small">adc.h/gpio.h/eeprom.h in C)</text>
+
+  <rect x="65" y="258" width="200" height="65" class="box"/>
+  <text x="165" y="284" text-anchor="middle" class="label">ADC driver</text>
+  <text x="165" y="302" text-anchor="middle" class="small">raw sample register</text>
+
+  <rect x="310" y="258" width="200" height="65" class="box"/>
+  <text x="410" y="284" text-anchor="middle" class="label">GPIO driver</text>
+  <text x="410" y="302" text-anchor="middle" class="small">LED pin state</text>
+
+  <rect x="555" y="258" width="200" height="65" class="box"/>
+  <text x="655" y="284" text-anchor="middle" class="label">EEPROM driver</text>
+  <text x="655" y="302" text-anchor="middle" class="small">I2C config block</text>
+
+  <!-- ISR layer -->
+  <rect x="30" y="360" width="760" height="90" rx="10" class="layer isr"/>
+  <text x="45" y="382" class="label" font-weight="bold">Interrupt Layer</text>
+  <rect x="65" y="392" width="330" height="42" class="box"/>
+  <text x="230" y="418" text-anchor="middle" class="label">TIMER_IRQHandler  (every 100 us, low jitter)</text>
+  <rect x="425" y="392" width="330" height="42" class="box"/>
+  <text x="590" y="418" text-anchor="middle" class="label">ADC_IRQHandler  (latches conversion result)</text>
+
+  <!-- Arrows -->
+  <line x1="120" y1="170" x2="120" y2="258" class="arrow"/>
+  <line x1="500" y1="170" x2="165" y2="258" class="arrow"/>
+  <line x1="687" y1="170" x2="410" y2="258" class="arrow"/>
+  <line x1="120" y1="170" x2="655" y2="258" class="arrow"/>
+
+  <line x1="165" y1="323" x2="230" y2="392" class="arrow" stroke-dasharray="4,3"/>
+  <line x1="165" y1="323" x2="590" y2="392" class="arrow" stroke-dasharray="4,3"/>
+  <text x="30" y="352" class="small">dashed: ISRs defined for target HW, not wired up in PC demo build</text>
+
+</svg>
